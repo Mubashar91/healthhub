@@ -10,11 +10,11 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-  description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness. Your trusted source for health information.',
+  description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health and live better every day.',
   keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'articles'],
   openGraph: {
     title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-    description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness.',
+    description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health.',
     type: 'website',
     url: 'https://healthhub-eta.vercel.app',
     images: [

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     template: '%s | HealthHub',
   },
-  description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles. Your trusted source for modern health information.',
+  description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health and live better.',
   keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'exercise', 'diet', 'meditation'],
   authors: [{ name: 'HealthHub Team' }],
   creator: 'HealthHub',
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
     url: 'https://healthhub-eta.vercel.app',
     siteName: 'HealthHub',
     title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-    description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
+    description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'HealthHub - Modern Wellness & Fitness Information',
+        alt: 'HealthHub - Evidence-Based Wellness & Health Articles',
       },
     ],
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     site: '@healthhub',
     creator: '@healthhub',
     title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-    description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
+    description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep.',
     images: ['/og-image.jpg'],
   },
   verification: {
