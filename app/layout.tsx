@@ -1,0 +1,150 @@
+import type { Metadata, Viewport } from 'next'
+import { Inter, Geist_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
+
+const _inter = Inter({ subsets: ["latin"] });
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://healthhub.com'),
+  title: {
+    default: 'HealthHub | Modern Wellness & Fitness Information',
+    template: '%s | HealthHub',
+  },
+  description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles. Your trusted source for modern health information.',
+  keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'exercise', 'diet', 'meditation'],
+  authors: [{ name: 'HealthHub Team' }],
+  creator: 'HealthHub',
+  publisher: 'HealthHub',
+  generator: 'Next.js',
+  applicationName: 'HealthHub',
+  referrer: 'origin-when-cross-origin',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://healthhub.com',
+    siteName: 'HealthHub',
+    title: 'HealthHub | Modern Wellness & Fitness Information',
+    description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HealthHub - Modern Wellness & Fitness Information',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@healthhub',
+    creator: '@healthhub',
+    title: 'HealthHub | Modern Wellness & Fitness Information',
+    description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
+    images: ['/og-image.jpg'],
+  },
+  verification: {
+    google: 'your-google-verification-code',
+  },
+  alternates: {
+    canonical: 'https://healthhub.com',
+    languages: {
+      'en-US': 'https://healthhub.com',
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/icon-light-32x32.png',
+  },
+  manifest: '/manifest.json',
+  category: 'health',
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" className="bg-background">
+      <head>
+        {/* Organization Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'HealthHub',
+              url: 'https://healthhub.com',
+              logo: 'https://healthhub.com/icon.svg',
+              description: 'Your trusted source for evidence-based health and wellness information.',
+              sameAs: [
+                'https://twitter.com/healthhub',
+                'https://facebook.com/healthhub',
+                'https://instagram.com/healthhub',
+              ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                email: 'hello@healthhub.com',
+                contactType: 'customer service',
+              },
+            }),
+          }}
+        />
+        {/* WebSite Structured Data with Search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'HealthHub',
+              url: 'https://healthhub.com',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: 'https://healthhub.com/search?q={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased" suppressHydrationWarning>
+        {children}
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
+}
