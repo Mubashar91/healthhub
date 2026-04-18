@@ -5,7 +5,7 @@ import { Sidebar } from '@/components/sidebar'
 import { ArticleCard } from '@/components/article-card'
 import { Newsletter } from '@/components/newsletter'
 import { Footer } from '@/components/footer'
-import { getArticleBySlug, getRelatedArticles, getAllSlugs } from '@/lib/articles-data'
+import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAuthorByName, getArticleById } from '@/lib/articles-data'
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark } from 'lucide-react'
 
@@ -68,10 +68,11 @@ export async function generateMetadata({ params }: ArticlePageProps) {
     },
     other: {
       'article:published_time': article.date,
-      'article:modified_time': article.date,
+      'article:modified_time': article.lastModified || article.date,
       'article:author': article.author,
       'article:section': article.category,
       'article:tag': article.tags?.join(', '),
+      'wordCount': article.wordCount?.toString(),
     },
   }
 }
@@ -94,19 +95,19 @@ function ArticleSchema({ article }: { article: ReturnType<typeof getArticleById>
       name: 'HealthHub',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://healthhub.com/logo.png',
+        url: 'https://healthhub-eta.vercel.app/logo.png',
       },
     },
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: article.lastModified || article.date,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://healthhub.com/article/${article.id}`,
+      '@id': `https://healthhub-eta.vercel.app/article/${article.slug}`,
     },
     image: article.image,
     articleSection: article.category,
     keywords: article.keywords?.join(', ') || article.tags?.join(', '),
-    wordCount: article.content.split(/\s+/).length,
+    wordCount: article.wordCount || article.content.split(/\s+/).length,
     timeRequired: `PT${parseInt(article.readTime)}M`,
   }
 
@@ -130,21 +131,46 @@ function BreadcrumbSchema({ article }: { article: ReturnType<typeof getArticleBy
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://healthhub.com',
+        item: 'https://healthhub-eta.vercel.app',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: article.category,
-        item: `https://healthhub.com/category/${article.category.toLowerCase().replace(' ', '-')}`,
+        item: `https://healthhub-eta.vercel.app/category/${article.category.toLowerCase().replace(' ', '-')}`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: article.title,
-        url: `https://healthhub.com/article/${article.slug}`,
+        item: `https://healthhub-eta.vercel.app/article/${article.slug}`,
       },
     ],
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+// FAQ Schema for articles with FAQs
+function FAQSchema({ article }: { article: ReturnType<typeof getArticleById> }) {
+  if (!article || !article.faqs || article.faqs.length === 0) return null
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: article.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   }
 
   return (
@@ -214,6 +240,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   const relatedArticles = getRelatedArticles(article.id)
+  const author = getAuthorByName(article.author)
 
   return (
     <>
@@ -319,14 +346,44 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <User className="h-6 w-6 text-primary" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="font-bold text-foreground">Written by {article.author}</h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Health and wellness expert with years of experience in {article.category.toLowerCase()}.
-                      </p>
+                      {author && (
+                        <>
+                          <p className="text-sm text-primary font-medium mt-0.5">{author.title}</p>
+                          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                            {author.bio}
+                          </p>
+                        </>
+                      )}
+                      {!author && (
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Health and wellness expert with years of experience in {article.category.toLowerCase()}.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
+
+                {/* FAQ Section */}
+                {article.faqs && article.faqs.length > 0 && (
+                  <div className="mt-12">
+                    <h2 className="text-2xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
+                    <div className="space-y-4">
+                      {article.faqs.map((faq, idx) => (
+                        <div key={idx} className="rounded-xl border border-border bg-card p-5">
+                          <h3 className="font-semibold text-foreground mb-2 flex items-start gap-2">
+                            <span className="text-primary shrink-0">Q:</span>
+                            {faq.question}
+                          </h3>
+                          <p className="text-foreground/70 text-sm leading-relaxed pl-5">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Sidebar - Sticky on desktop */}
@@ -363,6 +420,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* SEO Structured Data */}
       <ArticleSchema article={article} />
       <BreadcrumbSchema article={article} />
+      <FAQSchema article={article} />
     </>
   )
 }

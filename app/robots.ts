@@ -20,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://healthhub.com/sitemap.xml',
-    host: 'https://healthhub.com',
+    sitemap: 'https://healthhub-eta.vercel.app/sitemap.xml',
+    host: 'https://healthhub-eta.vercel.app',
   }
 }

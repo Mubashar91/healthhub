@@ -11,7 +11,7 @@ export const metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://healthhub.com/disclaimer',
+    canonical: 'https://healthhub-eta.vercel.app/disclaimer',
   },
 }
 
@@ -101,13 +101,13 @@ export default function DisclaimerPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://healthhub.com',
+                item: 'https://healthhub-eta.vercel.app',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Medical Disclaimer',
-                item: 'https://healthhub.com/disclaimer',
+                item: 'https://healthhub-eta.vercel.app/disclaimer',
               },
             ],
           }),

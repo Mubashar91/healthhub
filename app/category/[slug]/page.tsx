@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
       title: `${categoryName} Articles | HealthHub`,
       description: categoryDescriptions[slug],
       type: 'website',
-      url: `https://healthhub.com/category/${slug}`,
+      url: `https://healthhub-eta.vercel.app/category/${slug}`,
       images: [
         {
           url: '/og-image.jpg',
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
       images: ['/og-image.jpg'],
     },
     alternates: {
-      canonical: `https://healthhub.com/category/${slug}`,
+      canonical: `https://healthhub-eta.vercel.app/category/${slug}`,
     },
     robots: {
       index: true,
@@ -154,13 +154,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://healthhub.com',
+                item: 'https://healthhub-eta.vercel.app',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: categoryName,
-                item: `https://healthhub.com/category/${slug}`,
+                item: `https://healthhub-eta.vercel.app/category/${slug}`,
               },
             ],
           }),

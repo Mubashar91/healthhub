@@ -16,7 +16,7 @@ export const metadata = {
     title: 'HealthHub | Modern Wellness & Fitness Information',
     description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness.',
     type: 'website',
-    url: 'https://healthhub.com',
+    url: 'https://healthhub-eta.vercel.app',
     images: [
       {
         url: '/og-image.jpg',
@@ -33,7 +33,7 @@ export const metadata = {
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://healthhub.com',
+    canonical: 'https://healthhub-eta.vercel.app',
   },
 }
 
@@ -233,10 +233,10 @@ export default function Home() {
             '@type': 'WebSite',
             name: 'HealthHub',
             description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
-            url: 'https://healthhub.com',
+            url: 'https://healthhub-eta.vercel.app',
             potentialAction: {
               '@type': 'SearchAction',
-              target: 'https://healthhub.com/search?q={search_term_string}',
+              target: 'https://healthhub-eta.vercel.app/search?q={search_term_string}',
               'query-input': 'required name=search_term_string',
             },
             publisher: {
@@ -244,7 +244,7 @@ export default function Home() {
               name: 'HealthHub',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://healthhub.com/icon.svg',
+                url: 'https://healthhub-eta.vercel.app/icon.svg',
               },
             },
           }),

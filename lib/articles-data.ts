@@ -1,3 +1,14 @@
+export interface Author {
+  name: string
+  bio: string
+  title: string
+  image?: string
+  social?: {
+    twitter?: string
+    linkedin?: string
+  }
+}
+
 export interface Article {
   id: string
   slug: string
@@ -13,6 +24,84 @@ export interface Article {
   image: string
   featured?: boolean
   tags?: string[]
+  wordCount?: number
+  faqs?: { question: string; answer: string }[]
+  lastModified?: string
+}
+
+export const authors: Record<string, Author> = {
+  'Dr. Sarah Mitchell': {
+    name: 'Dr. Sarah Mitchell',
+    title: 'Sleep Medicine Specialist',
+    bio: 'Dr. Sarah Mitchell is a board-certified sleep medicine specialist with over 15 years of experience helping patients improve their sleep quality and overall health through evidence-based treatments.',
+    social: {
+      twitter: '@drsarahmitchell',
+      linkedin: 'dr-sarah-mitchell',
+    },
+  },
+  'Jennifer Lee, RD': {
+    name: 'Jennifer Lee, RD',
+    title: 'Registered Dietitian & Nutritionist',
+    bio: 'Jennifer Lee is a registered dietitian specializing in plant-based nutrition and sustainable eating habits. She helps clients transition to healthier lifestyles through personalized nutrition plans.',
+    social: {
+      twitter: '@jenniferleerd',
+      linkedin: 'jennifer-lee-rd',
+    },
+  },
+  'Dr. Michael Chen': {
+    name: 'Dr. Michael Chen',
+    title: 'Clinical Psychologist & Stress Management Expert',
+    bio: 'Dr. Michael Chen is a licensed clinical psychologist specializing in stress management, anxiety disorders, and cognitive behavioral therapy. He has published numerous research papers on natural stress reduction techniques.',
+    social: {
+      twitter: '@drmichaelchen',
+      linkedin: 'dr-michael-chen',
+    },
+  },
+  'Alex Thompson': {
+    name: 'Alex Thompson',
+    title: 'Certified Personal Trainer',
+    bio: 'Alex Thompson is a certified personal trainer and fitness coach with expertise in bodyweight training, home workouts, and helping beginners build sustainable exercise habits.',
+    social: {
+      twitter: '@alexthompsonfit',
+      linkedin: 'alex-thompson-fitness',
+    },
+  },
+  'Dr. Emma Wilson': {
+    name: 'Dr. Emma Wilson',
+    title: 'Nutrition Scientist & Hydration Expert',
+    bio: 'Dr. Emma Wilson holds a PhD in nutrition science and has spent over a decade researching the effects of hydration on human performance, cognitive function, and overall health.',
+    social: {
+      twitter: '@dremmawilson',
+      linkedin: 'dr-emma-wilson',
+    },
+  },
+  'Dr. Lisa Park': {
+    name: 'Dr. Lisa Park',
+    title: 'Meditation & Mindfulness Instructor',
+    bio: 'Dr. Lisa Park is a meditation teacher and clinical psychologist who specializes in using mindfulness-based interventions for anxiety, depression, and stress management.',
+    social: {
+      twitter: '@drlisapark',
+      linkedin: 'dr-lisa-park',
+    },
+  },
+  'Sarah Thompson': {
+    name: 'Sarah Thompson',
+    title: 'Health & Wellness Writer',
+    bio: 'Sarah Thompson is a health and wellness writer who documents her personal experiments with lifestyle changes, sharing honest, research-backed insights from her own health journey.',
+    social: {
+      twitter: '@sarahthompsonhw',
+      linkedin: 'sarah-thompson-wellness',
+    },
+  },
+  'Jennifer Walsh': {
+    name: 'Jennifer Walsh',
+    title: 'Longevity Researcher & Health Writer',
+    bio: 'Jennifer Walsh specializes in translating longevity research into practical, actionable advice. She focuses on evidence-based strategies for extending healthspan and improving quality of life.',
+    social: {
+      twitter: '@jenniferwalsh',
+      linkedin: 'jennifer-walsh-health',
+    },
+  },
 }
 
 export const articles: Article[] = [
@@ -44,6 +133,22 @@ Implementing even a few of these tips can lead to significant improvements in yo
     image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=400&fit=crop',
     featured: true,
     tags: ['sleep', 'wellness', 'science'],
+    wordCount: 650,
+    lastModified: '2024-03-20',
+    faqs: [
+      {
+        question: 'How many hours of sleep do adults need?',
+        answer: 'Most adults need 7-9 hours of quality sleep per night for optimal health and cognitive function.',
+      },
+      {
+        question: 'What is the best temperature for sleep?',
+        answer: 'The ideal bedroom temperature for sleep is between 60-67°F (15-19°C). Cooler temperatures help your body temperature drop, which is necessary for sleep onset.',
+      },
+      {
+        question: 'Can meditation really help with insomnia?',
+        answer: 'Yes, research shows that regular meditation can reduce insomnia symptoms by 40-50% by calming the mind and reducing stress hormones that interfere with sleep.',
+      },
+    ],
   },
   {
     id: '2',
@@ -76,6 +181,22 @@ Remember that every body is different. What works for one person might need adju
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop',
     featured: true,
     tags: ['nutrition', 'vegan', 'diet'],
+    wordCount: 850,
+    lastModified: '2024-03-18',
+    faqs: [
+      {
+        question: 'Can you get enough protein on a plant-based diet?',
+        answer: 'Yes, you can easily meet protein needs with legumes, tofu, tempeh, quinoa, nuts, and seeds. The key is eating a variety of protein sources throughout the day.',
+      },
+      {
+        question: 'Do vegans need B12 supplements?',
+        answer: 'Yes, Vitamin B12 is not naturally available in plant foods. Vegans should take B12 supplements or consume fortified foods regularly to prevent deficiency.',
+      },
+      {
+        question: 'Is a plant-based diet healthier than eating meat?',
+        answer: 'Research shows plant-based diets are associated with lower risks of heart disease, type 2 diabetes, and certain cancers. However, any diet requires proper planning to be healthy.',
+      },
+    ],
   },
   {
     id: '3',
@@ -111,6 +232,22 @@ Remember, if stress becomes overwhelming, reaching out to a mental health profes
     image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=400&fit=crop',
     featured: true,
     tags: ['mental health', 'stress', 'wellness'],
+    wordCount: 720,
+    lastModified: '2024-03-15',
+    faqs: [
+      {
+        question: 'What is the 4-7-8 breathing technique?',
+        answer: 'The 4-7-8 breathing technique involves inhaling for 4 counts, holding for 7 counts, and exhaling for 8 counts. This pattern activates the parasympathetic nervous system and reduces stress.',
+      },
+      {
+        question: 'How quickly can natural stress relief techniques work?',
+        answer: 'Immediate techniques like deep breathing can reduce stress in 2-5 minutes. Long-term practices like meditation show significant benefits after 2-4 weeks of consistent practice.',
+      },
+      {
+        question: 'When should I see a professional for stress?',
+        answer: 'Seek professional help if stress interferes with daily activities, causes persistent physical symptoms, or leads to feelings of hopelessness or depression.',
+      },
+    ],
   },
   {
     id: '4',
@@ -150,6 +287,22 @@ Consistency beats perfection. Even 20 minutes of exercise is better than skippin
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1517836357463-d25ddfcb3ef8?w=800&h=400&fit=crop',
     tags: ['fitness', 'workout', 'home'],
+    wordCount: 580,
+    lastModified: '2024-03-12',
+    faqs: [
+      {
+        question: 'Can I build muscle with home workouts?',
+        answer: 'Yes, you can build muscle at home using bodyweight exercises, resistance bands, and dumbbells. Progressive overload by increasing reps, sets, or resistance over time.',
+      },
+      {
+        question: 'How often should beginners work out?',
+        answer: 'Beginners should start with 3 days per week, allowing at least one rest day between sessions. As fitness improves, gradually increase to 4-5 days per week.',
+      },
+      {
+        question: 'What equipment do I need for home workouts?',
+        answer: 'You can start with no equipment using bodyweight exercises. Recommended additions include a yoga mat, resistance bands, and a set of dumbbells for variety.',
+      },
+    ],
   },
   {
     id: '5',
@@ -188,6 +341,22 @@ Proper hydration improves mental clarity, energy levels, and physical performanc
     readTime: '4 min read',
     image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&h=400&fit=crop',
     tags: ['nutrition', 'hydration', 'wellness'],
+    wordCount: 480,
+    lastModified: '2024-03-10',
+    faqs: [
+      {
+        question: 'How much water should I drink daily?',
+        answer: 'While 8 glasses (64 oz) is a general guideline, individual needs vary. A better indicator is urine color - pale yellow indicates proper hydration.',
+      },
+      {
+        question: 'Can you drink too much water?',
+        answer: 'Yes, excessive water intake can lead to hyponatremia (low blood sodium). Generally, avoid drinking more than 1 liter per hour.',
+      },
+      {
+        question: 'Does coffee and tea count toward hydration?',
+        answer: 'Yes, caffeinated beverages do contribute to hydration, though they may have a mild diuretic effect. Water remains the best choice for hydration.',
+      },
+    ],
   },
   {
     id: '6',
@@ -222,6 +391,22 @@ Research shows regular meditation reduces anxiety by up to 40%. Start with just 
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=400&fit=crop',
     tags: ['meditation', 'anxiety', 'mental health'],
+    wordCount: 620,
+    lastModified: '2024-03-08',
+    faqs: [
+      {
+        question: 'How long should I meditate for anxiety?',
+        answer: 'Start with just 5-10 minutes daily. Consistency matters more than duration. Gradually increase to 15-20 minutes as you become more comfortable.',
+      },
+      {
+        question: 'What if my mind keeps wandering during meditation?',
+        answer: 'Mind wandering is normal and expected. The practice is noticing when your mind wanders and gently bringing focus back without judgment.',
+      },
+      {
+        question: 'When is the best time to meditate for anxiety?',
+        answer: 'Morning meditation can set a calm tone for the day. However, meditating when you feel anxious can provide immediate relief. Find what works for you.',
+      },
+    ],
   },
   {
     id: '7',
@@ -308,6 +493,22 @@ Thirty days from now, you might be writing your own version of this post.`,
     image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=400&fit=crop',
     featured: true,
     tags: ['sleep', 'morning routine', 'productivity', 'wellness'],
+    wordCount: 2100,
+    lastModified: '2024-04-18',
+    faqs: [
+      {
+        question: 'Is waking up at 5 AM healthy for everyone?',
+        answer: 'While early rising has benefits, the ideal wake time varies by individual chronotype. Consistency matters more than the specific hour.',
+      },
+      {
+        question: 'How long does it take to adjust to a 5 AM wake time?',
+        answer: 'Most people need 2-3 weeks for their circadian rhythm to fully adjust. Gradual 15-minute shifts work better than abrupt changes.',
+      },
+      {
+        question: 'What time should I go to bed if I wake up at 5 AM?',
+        answer: 'For 7-8 hours of sleep, aim for a 9-10 PM bedtime. Quality of sleep matters more than the exact hours.',
+      },
+    ],
   },
   {
     id: '8',
@@ -386,6 +587,22 @@ The science on this is remarkably clear. Your hormones, your immune system, your
     image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&h=400&fit=crop',
     featured: true,
     tags: ['sleep', 'circadian rhythm', 'fatigue', 'health'],
+    wordCount: 1850,
+    lastModified: '2024-04-15',
+    faqs: [
+      {
+        question: 'Why am I still tired after 8 hours of sleep?',
+        answer: 'Sleep quality and timing matter as much as quantity. Waking during deep sleep or misaligned circadian rhythms can cause grogginess despite adequate hours.',
+      },
+      {
+        question: 'What is social jet lag?',
+        answer: 'Social jet lag occurs when your weekday and weekend sleep schedules differ significantly, disrupting your circadian rhythm similar to actual jet lag.',
+      },
+      {
+        question: 'How can I fix my sleep schedule?',
+        answer: 'Maintain consistent sleep/wake times, get morning sunlight, limit evening blue light, and be patient - circadian adjustments take 2-3 weeks.',
+      },
+    ],
   },
   {
     id: '9',
@@ -476,6 +693,22 @@ Given what the research consistently shows about the long-term payoff, it might 
     image: 'https://images.unsplash.com/photo-1517836357463-d25ddfcb3ef8?w=800&h=400&fit=crop',
     featured: true,
     tags: ['morning routine', 'longevity', 'sleep', 'health', 'wellness'],
+    wordCount: 1950,
+    lastModified: '2024-04-14',
+    faqs: [
+      {
+        question: 'Does waking up early really add years to your life?',
+        answer: 'Research shows consistent early rising is associated with lower risks of cardiovascular disease, depression, and metabolic syndrome - all factors that impact longevity.',
+      },
+      {
+        question: 'What is the cortisol awakening response?',
+        answer: 'It is the natural surge of cortisol that occurs in the early morning, designed to energize and prepare your body for the day. Missing this window by sleeping late disrupts optimal functioning.',
+      },
+      {
+        question: 'How early should I wake up for health benefits?',
+        answer: 'The exact time matters less than consistency. Most research focuses on waking with or slightly before sunrise. Find a time that allows 7-8 hours of quality sleep.',
+      },
+    ],
   },
 ]
 
@@ -506,4 +739,18 @@ export function getRelatedArticles(articleId: string, limit: number = 3): Articl
   return articles
     .filter(a => a.id !== articleId && a.category === article.category)
     .slice(0, limit)
+}
+
+export function getAuthorByName(name: string): Author | undefined {
+  return authors[name]
+}
+
+export function getAllAuthors(): Author[] {
+  return Object.values(authors)
+}
+
+export function calculateReadingTime(wordCount: number): string {
+  const wordsPerMinute = 200
+  const minutes = Math.ceil(wordCount / wordsPerMinute)
+  return `${minutes} min read`
 }

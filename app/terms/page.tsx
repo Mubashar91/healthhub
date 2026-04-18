@@ -10,13 +10,13 @@ export const metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://healthhub.com/terms',
+    canonical: 'https://healthhub-eta.vercel.app/terms',
   },
   openGraph: {
     title: 'Terms of Service | HealthHub',
     description: 'HealthHub terms and conditions for using our wellness platform.',
     type: 'website',
-    url: 'https://healthhub.com/terms',
+    url: 'https://healthhub-eta.vercel.app/terms',
   },
 }
 
@@ -92,13 +92,13 @@ export default function TermsPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://healthhub.com',
+                item: 'https://healthhub-eta.vercel.app',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Terms of Service',
-                item: 'https://healthhub.com/terms',
+                item: 'https://healthhub-eta.vercel.app/terms',
               },
             ],
           }),

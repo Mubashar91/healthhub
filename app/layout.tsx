@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://healthhub.com'),
+  metadataBase: new URL('https://healthhub-eta.vercel.app'),
   title: {
     default: 'HealthHub | Modern Wellness & Fitness Information',
     template: '%s | HealthHub',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://healthhub.com',
+    url: 'https://healthhub-eta.vercel.app',
     siteName: 'HealthHub',
     title: 'HealthHub | Modern Wellness & Fitness Information',
     description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
@@ -70,9 +70,9 @@ export const metadata: Metadata = {
     google: 'your-google-verification-code',
   },
   alternates: {
-    canonical: 'https://healthhub.com',
+    canonical: 'https://healthhub-eta.vercel.app',
     languages: {
-      'en-US': 'https://healthhub.com',
+      'en-US': 'https://healthhub-eta.vercel.app',
     },
   },
   icons: {
@@ -122,8 +122,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'HealthHub',
-              url: 'https://healthhub.com',
-              logo: 'https://healthhub.com/icon.svg',
+              url: 'https://healthhub-eta.vercel.app',
+              logo: 'https://healthhub-eta.vercel.app/icon.svg',
               description: 'Your trusted source for evidence-based health and wellness information.',
               sameAs: [
                 'https://twitter.com/healthhub',
@@ -146,12 +146,12 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'HealthHub',
-              url: 'https://healthhub.com',
+              url: 'https://healthhub-eta.vercel.app',
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {
                   '@type': 'EntryPoint',
-                  urlTemplate: 'https://healthhub.com/search?q={search_term_string}',
+                  urlTemplate: 'https://healthhub-eta.vercel.app/search?q={search_term_string}',
                 },
                 'query-input': 'required name=search_term_string',
               },

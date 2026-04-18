@@ -10,13 +10,13 @@ export const metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://healthhub.com/privacy',
+    canonical: 'https://healthhub-eta.vercel.app/privacy',
   },
   openGraph: {
     title: 'Privacy Policy | HealthHub',
     description: 'Learn how HealthHub protects your personal information and privacy.',
     type: 'website',
-    url: 'https://healthhub.com/privacy',
+    url: 'https://healthhub-eta.vercel.app/privacy',
   },
 }
 
@@ -87,13 +87,13 @@ export default function PrivacyPage() {
                 '@type': 'ListItem',
                 position: 1,
                 name: 'Home',
-                item: 'https://healthhub.com',
+                item: 'https://healthhub-eta.vercel.app',
               },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Privacy Policy',
-                item: 'https://healthhub.com/privacy',
+                item: 'https://healthhub-eta.vercel.app/privacy',
               },
             ],
           }),

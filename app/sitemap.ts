@@ -4,7 +4,7 @@ import { articles, getAllSlugs } from '@/lib/articles-data'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://healthhub.com'
+  const baseUrl = 'https://healthhub-eta.vercel.app'
 
   // Static pages
   const staticPages = [
