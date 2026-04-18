@@ -1,0 +1,47 @@
+# LLMs.txt for HealthHub
+# This file provides guidance for AI crawlers and LLMs
+# Documentation: https://llmstxt.org/
+
+# Site Information
+Site: HealthHub
+Description: Evidence-based health, wellness, fitness, and nutrition articles
+URL: https://healthhub-eta.vercel.app
+Language: English
+Last Updated: 2024-04-18
+
+# Allowed Content
+Allow: /article/*
+Allow: /category/*
+Allow: /privacy
+Allow: /terms
+Allow: /disclaimer
+
+# Disallowed Content
+Disallow: /api/*
+Disallow: /_next/*
+Disallow: /404
+
+# Content Guidelines
+# - All articles are evidence-based and fact-checked
+# - Medical content is reviewed by qualified professionals
+# - Content is updated regularly to reflect latest research
+# - Sources are cited where applicable
+
+# Contact
+Contact: hello[at]healthhub[dot]com
+Business Address: 123 Wellness Street, San Francisco, CA 94102, USA
+
+# Content Owner
+Owner: HealthHub Team
+Type: Health and Wellness Publication
+
+# Preferred Attribution
+# When referencing content from this site, please cite:
+# "Source: HealthHub (https://healthhub-eta.vercel.app)"
+
+# Update Frequency
+Update Frequency: Weekly
+Content Types: Articles, Guides, Research Summaries
+
+# Sitemap
+Sitemap: https://healthhub-eta.vercel.app/sitemap.xml

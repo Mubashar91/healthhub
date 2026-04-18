@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://healthhub-eta.vercel.app'),
   title: {
-    default: 'HealthHub | Modern Wellness & Fitness Information',
+    default: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     template: '%s | HealthHub',
   },
   description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles. Your trusted source for modern health information.',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://healthhub-eta.vercel.app',
     siteName: 'HealthHub',
-    title: 'HealthHub | Modern Wellness & Fitness Information',
+    title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
     images: [
       {
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@healthhub',
     creator: '@healthhub',
-    title: 'HealthHub | Modern Wellness & Fitness Information',
+    title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
     images: ['/og-image.jpg'],
   },
@@ -135,6 +135,37 @@ export default function RootLayout({
                 email: 'hello@healthhub.com',
                 contactType: 'customer service',
               },
+            }),
+          }}
+        />
+        {/* LocalBusiness Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'HealthAndBeautyBusiness',
+              name: 'HealthHub',
+              url: 'https://healthhub-eta.vercel.app',
+              logo: 'https://healthhub-eta.vercel.app/icon.svg',
+              description: 'Your trusted source for evidence-based health and wellness information.',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '123 Wellness Street',
+                addressLocality: 'San Francisco',
+                addressRegion: 'CA',
+                postalCode: '94102',
+                addressCountry: 'US',
+              },
+              telephone: '+1-415-555-0123',
+              email: 'hello@healthhub.com',
+              openingHours: 'Mo-Fr 09:00-18:00',
+              sameAs: [
+                'https://twitter.com/healthhub',
+                'https://facebook.com/healthhub',
+                'https://instagram.com/healthhub',
+              ],
+              priceRange: '$$',
             }),
           }}
         />

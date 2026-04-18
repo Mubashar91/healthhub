@@ -9,11 +9,11 @@ import { ArrowRight, TrendingUp, Sparkles, Clock } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'HealthHub | Modern Wellness & Fitness Information',
+  title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
   description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness. Your trusted source for health information.',
   keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'articles'],
   openGraph: {
-    title: 'HealthHub | Modern Wellness & Fitness Information',
+    title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness.',
     type: 'website',
     url: 'https://healthhub-eta.vercel.app',

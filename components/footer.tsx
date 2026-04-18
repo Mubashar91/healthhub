@@ -122,11 +122,15 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Mail className="h-3.5 w-3.5" />
-                <span>hello@healthhub.com</span>
+                <span className="font-mono">hello[at]healthhub[dot]com</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5" />
-                <span>San Francisco, CA</span>
+                <Phone className="h-3.5 w-3.5" />
+                <span>+1 (415) 555-0123</span>
+              </div>
+              <div className="flex items-start gap-2 text-xs text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>123 Wellness Street<br />San Francisco, CA 94102</span>
               </div>
             </div>
           </div>
