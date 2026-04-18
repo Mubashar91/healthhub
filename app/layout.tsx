@@ -96,6 +96,24 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <head>
+        {/* Google tag (gtag.js) - GA4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G92RECTKY3" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-G92RECTKY3');
+            `,
+          }}
+        />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8497285724891966"
+          crossOrigin="anonymous"
+        />
         {/* Organization Structured Data */}
         <script
           type="application/ld+json"
