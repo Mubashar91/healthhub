@@ -1,0 +1,10 @@
+// Article data - each article is in its own file for better maintainability
+export { sleepTipsArticle } from './sleep-tips'
+export { plantBasedNutritionArticle } from './plant-based-nutrition'
+export { managingStressArticle } from './managing-stress'
+export { homeWorkoutBeginnersArticle } from './home-workout-beginners'
+export { hydrationGuideArticle } from './hydration-guide'
+export { meditationAnxietyArticle } from './meditation-anxiety'
+export { wakeUp5am30DaysArticle } from './wake-up-5am-30-days'
+export { whyAlwaysTiredArticle } from './why-always-tired'
+export { morningHabitLongevityArticle } from './morning-habit-longevity'
