@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { articles, getAllSlugs } from '@/lib/articles-data'
+import { articles, getAllTags } from '@/lib/articles-data'
 
 export const dynamic = 'force-static'
 
@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/disclaimer`,
@@ -43,6 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
+  // Tag pages
+  const tags = getAllTags()
+  const tagPages = tags.map((tag) => ({
+    url: `${baseUrl}/tag/${tag}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }))
+
   // Article pages
   const articlePages = articles.map((article) => ({
     url: `${baseUrl}/article/${article.slug}`,
@@ -51,5 +66,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
-  return [...staticPages, ...categoryPages, ...articlePages]
+  return [...staticPages, ...categoryPages, ...tagPages, ...articlePages]
 }

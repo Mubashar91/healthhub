@@ -19,6 +19,7 @@ export function Footer() {
 
   const company = [
     { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
     { name: 'Fitness', href: '/category/fitness' },
     { name: 'Nutrition', href: '/category/nutrition' },
     { name: 'Mental Health', href: '/category/mental-health' },

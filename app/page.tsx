@@ -250,6 +250,24 @@ export default function Home() {
           }),
         }}
       />
+      {/* ItemList Structured Data for Articles */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'HealthHub Articles',
+            itemListElement: articles.map((article, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              url: `https://healthhub-eta.vercel.app/article/${article.slug}`,
+              name: article.title,
+              description: article.excerpt,
+            })),
+          }),
+        }}
+      />
     </>
   )
 }

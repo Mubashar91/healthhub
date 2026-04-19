@@ -159,6 +159,17 @@ export function getRelatedArticles(articleId: string, limit: number = 3): Articl
     .slice(0, limit)
 }
 
+export function getArticlesByTag(tag: string): Article[] {
+  return articles.filter(article => 
+    article.tags?.some(t => t.toLowerCase() === tag.toLowerCase())
+  )
+}
+
+export function getAllTags(): string[] {
+  const allTags = articles.flatMap(article => article.tags || [])
+  return [...new Set(allTags.map(tag => tag.toLowerCase()))].sort()
+}
+
 export function getAuthorByName(name: string): Author | undefined {
   return authors[name]
 }

@@ -166,6 +166,28 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           }),
         }}
       />
+      {/* CollectionPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${categoryName} Articles | HealthHub`,
+            description: categoryDescriptions[slug],
+            url: `https://healthhub-eta.vercel.app/category/${slug}`,
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: categoryArticles.map((article, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                url: `https://healthhub-eta.vercel.app/article/${article.slug}`,
+                name: article.title,
+              })),
+            },
+          }),
+        }}
+      />
     </>
   )
 }
