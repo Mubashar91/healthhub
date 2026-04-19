@@ -9,6 +9,7 @@ import {
   wakeUp5am30DaysArticle,
   whyAlwaysTiredArticle,
   morningHabitLongevityArticle,
+  quitSugar30DaysArticle,
 } from './articles'
 
 export interface Author {
@@ -128,6 +129,7 @@ export const articles: Article[] = [
   wakeUp5am30DaysArticle,
   whyAlwaysTiredArticle,
   morningHabitLongevityArticle,
+  quitSugar30DaysArticle,
 ]
 
 export function getArticleById(id: string): Article | undefined {
