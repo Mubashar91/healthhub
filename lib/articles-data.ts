@@ -149,7 +149,7 @@ export function getArticlesByCategory(category: string): Article[] {
 }
 
 export function getFeaturedArticles(): Article[] {
-  return articles.filter(article => article.featured).slice(0, 3)
+  return articles.filter(article => article.featured)
 }
 
 export function getRelatedArticles(articleId: string, limit: number = 3): Article[] {

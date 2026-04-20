@@ -120,7 +120,7 @@ Thirty days. It is a short enough window to commit to, and a long enough window 
   author: 'Sarah Thompson',
   date: 'April 19, 2024',
   readTime: '10 min read',
-  image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&h=400&fit=crop',
+  image: 'https://images.unsplash.com/photo-1582053433976-25c00369fc93?w=800&h=400&fit=crop',
   featured: true,
   tags: ['sugar', 'nutrition', 'diet', 'wellness', 'health challenge'],
   wordCount: 2800,

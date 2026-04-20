@@ -124,7 +124,12 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8497285724891966"
           crossOrigin="anonymous"
         />
-        {/* Organization Structured Data */}
+      </head>
+      <body className="font-sans antialiased" suppressHydrationWarning>
+        {children}
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+        
+        {/* Structured Data - Moved to body to avoid hydration issues */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -148,7 +153,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* LocalBusiness Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -179,7 +183,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* WebSite Structured Data with Search */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -199,10 +202,6 @@ export default function RootLayout({
             }),
           }}
         />
-      </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

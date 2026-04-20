@@ -107,7 +107,7 @@ export default function Home() {
 
           {/* Secondary Featured Articles */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredArticles.slice(1, 4).map((article) => (
+            {featuredArticles.slice(1).map((article) => (
               <ArticleCard key={article.id} {...article} />
             ))}
           </div>
