@@ -124,6 +124,12 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8497285724891966"
           crossOrigin="anonymous"
         />
+        {/* Ahrefs Analytics */}
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="r5KXCChk9ZnQLs1AdVXdyQ"
+          async
+        />
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
