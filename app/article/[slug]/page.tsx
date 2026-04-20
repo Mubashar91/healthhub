@@ -200,6 +200,19 @@ function ArticleContent({ content }: { content: string }) {
 }
 
 function renderParagraph(paragraph: string, idx: number) {
+  // Handle headings (##, ###, etc.)
+  const headingMatch = paragraph.match(/^(#{1,6})\s+(.+)$/)
+  if (headingMatch) {
+    const level = headingMatch[1].length
+    const text = headingMatch[2]
+    const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
+    const sizeClasses = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-sm'][level - 1]
+    return (
+      <HeadingTag key={idx} className={`${sizeClasses} font-bold text-foreground mt-8 mb-4`}>
+        {text}
+      </HeadingTag>
+    )
+  }
   if (paragraph.startsWith('-')) {
     const items = paragraph.split('\n')
     return (
