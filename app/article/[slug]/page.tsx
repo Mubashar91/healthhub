@@ -205,13 +205,18 @@ function renderParagraph(paragraph: string, idx: number) {
   if (headingMatch) {
     const level = headingMatch[1].length
     const text = headingMatch[2]
-    const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
     const sizeClasses = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-sm'][level - 1]
-    return (
-      <HeadingTag key={idx} className={`${sizeClasses} font-bold text-foreground mt-8 mb-4`}>
-        {text}
-      </HeadingTag>
-    )
+    const className = `${sizeClasses} font-bold text-foreground mt-8 mb-4`
+    
+    switch (level) {
+      case 1: return <h1 key={idx} className={className}>{text}</h1>
+      case 2: return <h2 key={idx} className={className}>{text}</h2>
+      case 3: return <h3 key={idx} className={className}>{text}</h3>
+      case 4: return <h4 key={idx} className={className}>{text}</h4>
+      case 5: return <h5 key={idx} className={className}>{text}</h5>
+      case 6: return <h6 key={idx} className={className}>{text}</h6>
+      default: return <h2 key={idx} className={className}>{text}</h2>
+    }
   }
   if (paragraph.startsWith('-')) {
     const items = paragraph.split('\n')
