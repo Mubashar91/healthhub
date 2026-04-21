@@ -1,13 +1,9 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { Header } from '@/components/header'
-import { Sidebar } from '@/components/sidebar'
-import { ArticleCard } from '@/components/article-card'
-import { Newsletter } from '@/components/newsletter'
 import { Footer } from '@/components/footer'
 import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAuthorByName, getArticleById } from '@/lib/articles-data'
-import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark } from 'lucide-react'
+import { DefaultArticleTemplate } from './templates/default-article'
+import { MagazineArticleTemplate } from './templates/magazine-article'
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>
@@ -19,62 +15,6 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({
     slug: slug,
   }))
-}
-
-export async function generateMetadata({ params }: ArticlePageProps) {
-  const { slug } = await params
-  const article = getArticleBySlug(slug)
-
-  if (!article) {
-    return { title: 'Article Not Found' }
-  }
-
-  // Use SEO description if available, fallback to excerpt
-  const metaDescription = article.description || article.excerpt
-  const keywords = article.keywords?.join(', ') || article.tags?.join(', ') || 'health, wellness, fitness'
-
-  return {
-    title: `${article.title} | HealthHub`,
-    description: metaDescription,
-    keywords: keywords,
-    authors: [{ name: article.author }],
-    category: article.category,
-    openGraph: {
-      title: article.title,
-      description: metaDescription,
-      images: article.image ? [article.image] : [],
-      type: 'article',
-      publishedTime: article.date,
-      modifiedTime: article.date,
-      authors: [article.author],
-      tags: article.tags,
-      section: article.category,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: metaDescription,
-      images: article.image ? [article.image] : [],
-      creator: '@healthhub',
-    },
-    alternates: {
-      canonical: `/article/${article.slug}`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-    other: {
-      'article:published_time': article.date,
-      'article:modified_time': article.lastModified || article.date,
-      'article:author': article.author,
-      'article:section': article.category,
-      'article:tag': article.tags?.join(', '),
-      'wordCount': article.wordCount?.toString(),
-    },
-  }
 }
 
 // JSON-LD Schema for Article structured data
@@ -181,72 +121,60 @@ function FAQSchema({ article }: { article: ReturnType<typeof getArticleById> }) 
   )
 }
 
-// Component to split content and insert ads
-function ArticleContent({ content }: { content: string }) {
-  const paragraphs = content.split('\n\n')
-  const adInterval = 3 // Insert ad every 3 paragraphs
+export async function generateMetadata({ params }: ArticlePageProps) {
+  const { slug } = await params
+  const article = getArticleBySlug(slug)
 
-  return (
-    <>
-      {paragraphs.map((paragraph, idx) => {
-        // Insert ad after certain paragraphs
-        if (idx > 0 && idx % adInterval === 0 && idx < paragraphs.length - 2) {
-          return renderParagraph(paragraph, idx)
-        }
-        return renderParagraph(paragraph, idx)
-      })}
-    </>
-  )
-}
+  if (!article) {
+    return { title: 'Article Not Found' }
+  }
 
-function renderParagraph(paragraph: string, idx: number) {
-  // Handle headings (##, ###, etc.)
-  const headingMatch = paragraph.match(/^(#{1,6})\s+(.+)$/)
-  if (headingMatch) {
-    const level = headingMatch[1].length
-    const text = headingMatch[2]
-    const sizeClasses = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-sm'][level - 1]
-    const className = `${sizeClasses} font-bold text-foreground mt-8 mb-4`
-    
-    switch (level) {
-      case 1: return <h1 key={idx} className={className}>{text}</h1>
-      case 2: return <h2 key={idx} className={className}>{text}</h2>
-      case 3: return <h3 key={idx} className={className}>{text}</h3>
-      case 4: return <h4 key={idx} className={className}>{text}</h4>
-      case 5: return <h5 key={idx} className={className}>{text}</h5>
-      case 6: return <h6 key={idx} className={className}>{text}</h6>
-      default: return <h2 key={idx} className={className}>{text}</h2>
-    }
+  // Use SEO description if available, fallback to excerpt
+  const metaDescription = article.description || article.excerpt
+  const keywords = article.keywords?.join(', ') || article.tags?.join(', ') || 'health, wellness, fitness'
+
+  return {
+    title: `${article.title} | HealthHub`,
+    description: metaDescription,
+    keywords: keywords,
+    authors: [{ name: article.author }],
+    category: article.category,
+    openGraph: {
+      title: article.title,
+      description: metaDescription,
+      images: article.image ? [article.image] : [],
+      type: 'article',
+      publishedTime: article.date,
+      modifiedTime: article.date,
+      authors: [article.author],
+      tags: article.tags,
+      section: article.category,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: metaDescription,
+      images: article.image ? [article.image] : [],
+      creator: '@healthhub',
+    },
+    alternates: {
+      canonical: `/article/${article.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+    other: {
+      'article:published_time': article.date,
+      'article:modified_time': article.lastModified || article.date,
+      'article:author': article.author,
+      'article:section': article.category,
+      'article:tag': article.tags?.join(', '),
+      'wordCount': article.wordCount?.toString(),
+    },
   }
-  if (paragraph.startsWith('-')) {
-    const items = paragraph.split('\n')
-    return (
-      <ul key={idx} className="list-disc space-y-2 mb-6 ml-6">
-        {items.map((item, itemIdx) => (
-          <li key={itemIdx} className="text-foreground/80 leading-relaxed">
-            {item.replace(/^-\s/, '')}
-          </li>
-        ))}
-      </ul>
-    )
-  }
-  if (paragraph.match(/^\d+\./)) {
-    const items = paragraph.split('\n')
-    return (
-      <ol key={idx} className="list-decimal space-y-2 ml-6 mb-6">
-        {items.map((item, itemIdx) => (
-          <li key={itemIdx} className="text-foreground/80 leading-relaxed">
-            {item.replace(/^\d+\.\s/, '')}
-          </li>
-        ))}
-      </ol>
-    )
-  }
-  return (
-    <p key={idx} className="text-foreground/80 leading-[1.8] mb-6 text-base md:text-lg">
-      {paragraph}
-    </p>
-  )
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -260,177 +188,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const relatedArticles = getRelatedArticles(article.id)
   const author = getAuthorByName(article.author)
 
+  // Determine which template to use
+  const template = article.template || 'default'
+
   return (
     <>
       <Header />
-
+      
       <main>
-        {/* Article Header */}
-        <article className="border-b border-border bg-linear-to-b from-muted/30 to-background">
-          <div className="container mx-auto max-w-4xl px-4 py-8 md:py-12">
-            {/* Breadcrumb & Actions */}
-            <div className="flex items-center justify-between mb-6">
-              <Link
-                href={`/category/${article.category.toLowerCase().replace(' ', '-')}`}
-                className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Back to {article.category}
-              </Link>
-              <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Share">
-                  <Share2 className="h-4 w-4 text-muted-foreground" />
-                </button>
-                <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Bookmark">
-                  <Bookmark className="h-4 w-4 text-muted-foreground" />
-                </button>
-              </div>
-            </div>
-
-            {/* Article Meta */}
-            <div className="mb-6 space-y-4">
-              <Badge
-                variant="secondary"
-                className="bg-primary/10 text-primary hover:bg-primary/20 border-0 text-xs font-semibold"
-              >
-                {article.category}
-              </Badge>
-
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground text-balance">
-                {article.title}
-              </h1>
-
-              {/* Article Info */}
-              <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm text-muted-foreground pt-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="font-medium text-foreground/80">{article.author}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  {article.date}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  {article.readTime}
-                </div>
-              </div>
-
-              {/* Tags */}
-              {article.tags && article.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {article.tags.map((tag) => (
-                    <Link
-                      key={tag}
-                      href={`/tag/${tag}`}
-                      className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground/60 hover:bg-primary/10 hover:text-primary transition-colors"
-                    >
-                      #{tag}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Featured Image */}
-            {article.image && (
-              <div className="overflow-hidden rounded-2xl shadow-lg">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-auto object-cover max-h-[500px]"
-                />
-              </div>
-            )}
-          </div>
-        </article>
-
-        {/* Article Content with Sidebar */}
-        <section className="py-8 md:py-12">
-          <div className="container mx-auto max-w-7xl px-4">
-            <div className="grid gap-8 lg:grid-cols-3">
-              {/* Main Column */}
-              <div className="lg:col-span-2">
-                {/* Article Body with In-Article Ads */}
-                <div className="prose prose-lg max-w-none">
-                  <ArticleContent content={article.content} />
-                </div>
-
-                {/* Author Box */}
-                <div className="mt-12 rounded-2xl border border-border bg-card p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <User className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-foreground">Written by {article.author}</h3>
-                      {author && (
-                        <>
-                          <p className="text-sm text-primary font-medium mt-0.5">{author.title}</p>
-                          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                            {author.bio}
-                          </p>
-                        </>
-                      )}
-                      {!author && (
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Health and wellness expert with years of experience in {article.category.toLowerCase()}.
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* FAQ Section */}
-                {article.faqs && article.faqs.length > 0 && (
-                  <div className="mt-12">
-                    <h2 className="text-2xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
-                    <div className="space-y-4">
-                      {article.faqs.map((faq, idx) => (
-                        <div key={idx} className="rounded-xl border border-border bg-card p-5">
-                          <h3 className="font-semibold text-foreground mb-2 flex items-start gap-2">
-                            <span className="text-primary shrink-0">Q:</span>
-                            {faq.question}
-                          </h3>
-                          <p className="text-foreground/70 text-sm leading-relaxed pl-5">
-                            {faq.answer}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Sidebar - Sticky on desktop */}
-              <div className="lg:col-span-1">
-                <div className="lg:sticky lg:top-24">
-                  <Sidebar />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Related Articles */}
-        {relatedArticles.length > 0 && (
-          <section className="border-t border-border bg-linear-to-b from-muted/20 to-background py-12 md:py-16">
-            <div className="container mx-auto max-w-7xl px-4">
-              <h2 className="text-2xl font-bold text-foreground md:text-3xl mb-2">Related Articles</h2>
-              <p className="text-muted-foreground mb-8">More content you might enjoy</p>
-              <div className="grid gap-6 md:grid-cols-3">
-                {relatedArticles.map((relatedArticle) => (
-                  <ArticleCard key={relatedArticle.id} {...relatedArticle} />
-                ))}
-              </div>
-            </div>
-          </section>
+        {template === 'magazine' ? (
+          <MagazineArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
+        ) : (
+          <DefaultArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
         )}
-
-        {/* Newsletter */}
-        <Newsletter />
       </main>
 
       <Footer />

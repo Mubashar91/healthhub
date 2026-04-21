@@ -10,6 +10,7 @@ import {
   whyAlwaysTiredArticle,
   morningHabitLongevityArticle,
   quitSugar30DaysArticle,
+  greenTeaBenefitsArticle,
 } from './articles'
 
 export interface Author {
@@ -41,6 +42,7 @@ export interface Article {
   wordCount?: number
   faqs?: { question: string; answer: string }[]
   lastModified?: string
+  template?: 'default' | 'magazine' // 'magazine' = green tea style, 'default' = current style
 }
 
 export const authors: Record<string, Author> = {
@@ -116,6 +118,15 @@ export const authors: Record<string, Author> = {
       linkedin: 'jennifer-walsh-health',
     },
   },
+  'Dr. Amara Wells, RD': {
+    name: 'Dr. Amara Wells, RD',
+    title: 'Registered Dietitian & Functional Nutrition Researcher',
+    bio: 'Dr. Amara Wells is a Registered Dietitian and functional nutrition researcher with 12 years of experience in evidence-based dietary guidance. She specializes in phytonutrients and their clinical applications.',
+    social: {
+      twitter: '@amarawellsrd',
+      linkedin: 'dr-amara-wells',
+    },
+  },
 }
 
 // Articles are now stored in individual files in the ./articles/ directory
@@ -130,6 +141,7 @@ export const articles: Article[] = [
   whyAlwaysTiredArticle,
   morningHabitLongevityArticle,
   quitSugar30DaysArticle,
+  greenTeaBenefitsArticle,
 ]
 
 export function getArticleById(id: string): Article | undefined {
