@@ -66,15 +66,15 @@ export const metadata: Metadata = {
     description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep.',
     images: ['/og-image.jpg'],
   },
-  verification: {
-    google: 'your-google-verification-code',
+  verification: {    
+    google: '6a08eSHLZe4Hm-aUTFaT6ki8Vdlu8XtgnIToasfh_Ho',
   },
   alternates: {
     canonical: 'https://healthhub-eta.vercel.app',
     languages: {
       'en-US': 'https://healthhub-eta.vercel.app',
     },
-  },
+  },  
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
