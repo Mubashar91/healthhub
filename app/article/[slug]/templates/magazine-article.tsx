@@ -258,11 +258,25 @@ export function MagazineArticleTemplate({ article, relatedArticles, author }: Ma
     <>
       {/* Hero Section - Magazine Style */}
       <section className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-green-900 text-white overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-green-300 rounded-full blur-3xl" />
-        </div>
+        {/* Background Image */}
+        {article.image && (
+          <div className="absolute inset-0">
+            <img 
+              src={article.image} 
+              alt={article.title}
+              className="w-full h-full object-cover opacity-30"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-emerald-800/85 to-green-900/90" />
+          </div>
+        )}
+        
+        {/* Background Pattern (fallback) */}
+        {!article.image && (
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-green-300 rounded-full blur-3xl" />
+          </div>
+        )}
         
         <div className="relative container mx-auto max-w-4xl px-4 py-16 md:py-24 text-center">
           {/* Tag */}
