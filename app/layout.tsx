@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     canonical: 'https://healthhub-eta.vercel.app',
     languages: {
       'en-US': 'https://healthhub-eta.vercel.app',
-    },oko
+    },
   },  
   icons: {
     icon: [
