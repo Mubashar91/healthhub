@@ -5,6 +5,7 @@ import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAuthorByName, get
 import { DefaultArticleTemplate } from './templates/default-article'
 import { MagazineArticleTemplate } from './templates/magazine-article'
 import { ChallengeArticleTemplate } from './templates/challenge-article'
+import { WellnessArticleTemplate } from './templates/wellness-article'
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>
@@ -197,7 +198,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <Header />
       
       <main>
-        {template === 'challenge' ? (
+        {template === 'wellness' ? (
+          <WellnessArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
+        ) : template === 'challenge' ? (
           <ChallengeArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
         ) : template === 'magazine' ? (
           <MagazineArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
