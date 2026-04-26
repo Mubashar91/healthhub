@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     canonical: 'https://healthhub-eta.vercel.app',
     languages: {
       'en-US': 'https://healthhub-eta.vercel.app',
-    },
+    },oko
   },  
   icons: {
     icon: [
@@ -106,29 +107,30 @@ export default function RootLayout({
         {/* Preload critical fonts */}
         <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         
-        {/* Google tag (gtag.js) - GA4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G92RECTKY3" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-G92RECTKY3');
-            `,
-          }}
+        {/* Google tag (gtag.js) - GA4 - Using next/script to avoid hydration issues */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-G92RECTKY3"
+          strategy="afterInteractive"
         />
-        {/* Google AdSense */}
-        <script
-          async
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-G92RECTKY3');
+          `}
+        </Script>
+        {/* Google AdSense - Using next/script */}
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8497285724891966"
+          strategy="afterInteractive"
           crossOrigin="anonymous"
         />
-        {/* Ahrefs Analytics */}
-        <script
+        {/* Ahrefs Analytics - Using next/script */}
+        <Script
           src="https://analytics.ahrefs.com/analytics.js"
+          strategy="afterInteractive"
           data-key="r5KXCChk9ZnQLs1AdVXdyQ"
-          async
         />
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>

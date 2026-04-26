@@ -42,7 +42,7 @@ export interface Article {
   wordCount?: number
   faqs?: { question: string; answer: string }[]
   lastModified?: string
-  template?: 'default' | 'magazine' // 'magazine' = green tea style, 'default' = current style
+  template?: 'default' | 'magazine' | 'challenge' // 'magazine' = green tea style, 'challenge' = 30-day experiment style, 'default' = current style
 }
 
 export const authors: Record<string, Author> = {

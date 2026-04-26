@@ -4,6 +4,7 @@ import { Footer } from '@/components/footer'
 import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAuthorByName, getArticleById } from '@/lib/articles-data'
 import { DefaultArticleTemplate } from './templates/default-article'
 import { MagazineArticleTemplate } from './templates/magazine-article'
+import { ChallengeArticleTemplate } from './templates/challenge-article'
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>
@@ -196,7 +197,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <Header />
       
       <main>
-        {template === 'magazine' ? (
+        {template === 'challenge' ? (
+          <ChallengeArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
+        ) : template === 'magazine' ? (
           <MagazineArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
         ) : (
           <DefaultArticleTemplate article={article} relatedArticles={relatedArticles} author={author} />
