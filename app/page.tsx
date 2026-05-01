@@ -10,11 +10,11 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-  description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health and live better every day.',
+  description: 'Expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Science-backed tips, diet guides, and workout plans to transform your health.',
   keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'articles'],
   openGraph: {
     title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
-    description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health.',
+    description: 'Expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Science-backed tips to transform your health.',
     type: 'website',
     url: 'https://healthhub-eta.vercel.app',
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'HealthHub | Modern Wellness & Fitness Information',
-    description: 'Discover evidence-based articles on fitness, nutrition, and mental wellness.',
+    description: 'Expert-reviewed articles on fitness, nutrition, and mental wellness. Science-backed health tips.',
     images: ['/og-image.jpg'],
   },
   alternates: {
@@ -47,7 +47,8 @@ const categories = [
 export default function Home() {
   const featuredArticles = getFeaturedArticles()
   const recentArticles = articles.slice(0, 6)
-  const trendingArticles = articles.slice(0, 3)
+  // Use non-featured articles for trending to avoid duplicate content with Editor's Picks
+  const trendingArticles = articles.filter(a => !a.featured).slice(0, 3)
 
   return (
     <>

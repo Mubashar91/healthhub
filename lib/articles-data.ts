@@ -11,6 +11,9 @@ import {
   morningHabitLongevityArticle,
   quitSugar30DaysArticle,
   greenTeaBenefitsArticle,
+  plantBasedDietBeginnersArticle,
+  plantBasedDietBenefitsArticle,
+  plantBasedEssentialNutrientsArticle,
 } from './articles'
 
 export interface Author {
@@ -142,6 +145,9 @@ export const articles: Article[] = [
   morningHabitLongevityArticle,
   quitSugar30DaysArticle,
   greenTeaBenefitsArticle,
+  plantBasedDietBeginnersArticle,
+  plantBasedDietBenefitsArticle,
+  plantBasedEssentialNutrientsArticle,
 ]
 
 export function getArticleById(id: string): Article | undefined {

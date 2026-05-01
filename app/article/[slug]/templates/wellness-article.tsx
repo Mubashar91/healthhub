@@ -6,7 +6,7 @@ import { ArticleCard } from '@/components/article-card'
 import { Newsletter } from '@/components/newsletter'
 import { type Article, type Author } from '@/lib/articles-data'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark, Heart, Brain, Sparkles } from 'lucide-react'
+import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark, Heart, Brain, Sparkles, ShieldCheck, RefreshCw } from 'lucide-react'
 
 interface WellnessArticleTemplateProps {
   article: Article
@@ -231,10 +231,24 @@ export function WellnessArticleTemplate({ article, relatedArticles, author }: We
               <Calendar className="h-4 w-4" />
               {article.date}
             </span>
+            {article.lastModified && (
+              <>
+                <span className="text-violet-400">•</span>
+                <span className="flex items-center gap-1.5">
+                  <RefreshCw className="h-4 w-4" />
+                  Updated {article.lastModified}
+                </span>
+              </>
+            )}
             <span className="text-violet-400">•</span>
             <span className="flex items-center gap-1.5">
               <Clock className="h-4 w-4" />
               {article.readTime}
+            </span>
+            <span className="text-violet-400">•</span>
+            <span className="flex items-center gap-1.5 text-violet-300">
+              <ShieldCheck className="h-4 w-4" />
+              Medically Reviewed
             </span>
           </div>
         </div>
@@ -294,6 +308,13 @@ export function WellnessArticleTemplate({ article, relatedArticles, author }: We
                 </div>
               </div>
             )}
+
+            {/* Medical Disclaimer */}
+            <div className="mt-12 rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800 p-5">
+              <p className="text-xs text-amber-800 dark:text-amber-200 leading-relaxed">
+                <strong className="font-semibold">Medical Disclaimer:</strong> This article is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before making changes to your diet, exercise routine, or treatment plan. Individual results may vary.
+              </p>
+            </div>
 
             {/* CTA */}
             <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-600 text-white text-center">

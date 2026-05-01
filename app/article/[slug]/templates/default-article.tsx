@@ -6,7 +6,7 @@ import { ArticleCard } from '@/components/article-card'
 import { Newsletter } from '@/components/newsletter'
 import { type Article, type Author } from '@/lib/articles-data'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark } from 'lucide-react'
+import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark, ShieldCheck, RefreshCw } from 'lucide-react'
 
 interface DefaultArticleTemplateProps {
   article: Article
@@ -29,13 +29,14 @@ function renderParagraph(paragraph: string, idx: number) {
   // Handle headings (##, ###, etc.)
   const headingMatch = paragraph.match(/^(#{1,6})\s+(.+)$/)
   if (headingMatch) {
-    const level = headingMatch[1].length
+    // Shift heading levels down by 1 to avoid duplicate H1 (article title is already H1)
+    const rawLevel = headingMatch[1].length
+    const level = Math.min(rawLevel + 1, 6)
     const text = headingMatch[2]
     const sizeClasses = ['text-3xl', 'text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm'][level - 1]
     const className = `${sizeClasses} font-bold text-foreground mt-10 mb-4 border-l-4 border-emerald-500 pl-4`
     
     switch (level) {
-      case 1: return <h1 key={idx} className={className}>{text}</h1>
       case 2: return <h2 key={idx} className={className}>{text}</h2>
       case 3: return <h3 key={idx} className={className}>{text}</h3>
       case 4: return <h4 key={idx} className={className}>{text}</h4>
@@ -128,9 +129,19 @@ export function DefaultArticleTemplate({ article, relatedArticles, author }: Def
                 <Calendar className="h-4 w-4" />
                 {article.date}
               </div>
+              {article.lastModified && (
+                <div className="flex items-center gap-2">
+                  <RefreshCw className="h-4 w-4" />
+                  Updated {article.lastModified}
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
                 {article.readTime}
+              </div>
+              <div className="flex items-center gap-1.5 text-emerald-600">
+                <ShieldCheck className="h-4 w-4" />
+                <span className="text-xs font-semibold">Medically Reviewed</span>
               </div>
             </div>
 
@@ -218,6 +229,13 @@ export function DefaultArticleTemplate({ article, relatedArticles, author }: Def
                   </div>
                 </div>
               )}
+
+              {/* Medical Disclaimer */}
+              <div className="mt-12 rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800 p-5">
+                <p className="text-xs text-amber-800 dark:text-amber-200 leading-relaxed">
+                  <strong className="font-semibold">Medical Disclaimer:</strong> This article is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before making changes to your diet, exercise routine, or treatment plan. Individual results may vary.
+                </p>
+              </div>
             </div>
 
             {/* Sidebar - Sticky on desktop */}

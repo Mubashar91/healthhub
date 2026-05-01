@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     default: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     template: '%s | HealthHub',
   },
-  description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Evidence-based tips to transform your health and live better.',
+  description: 'Expert-reviewed health articles on fitness, nutrition, mental wellness & sleep. Science-backed tips, diet guides, and workout plans to transform your health.',
   keywords: ['health', 'wellness', 'fitness', 'nutrition', 'mental health', 'lifestyle', 'exercise', 'diet', 'meditation'],
   authors: [{ name: 'HealthHub Team' }],
   creator: 'HealthHub',
@@ -166,39 +166,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'HealthAndBeautyBusiness',
+              '@type': 'WebSite',
               name: 'HealthHub',
               url: 'https://healthhub-eta.vercel.app',
               logo: 'https://healthhub-eta.vercel.app/icon.svg',
               description: 'Your trusted source for evidence-based health and wellness information.',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: '123 Wellness Street',
-                addressLocality: 'San Francisco',
-                addressRegion: 'CA',
-                postalCode: '94102',
-                addressCountry: 'US',
-              },
-              telephone: '+1-415-555-0123',
-              email: 'hello@healthhub.com',
-              openingHours: 'Mo-Fr 09:00-18:00',
               sameAs: [
                 'https://twitter.com/healthhub',
                 'https://facebook.com/healthhub',
                 'https://instagram.com/healthhub',
               ],
-              priceRange: '$$',
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'HealthHub',
-              url: 'https://healthhub-eta.vercel.app',
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {

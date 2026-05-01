@@ -30,9 +30,10 @@ function parseMagazineContent(content: string): ContentBlock[] {
   while (i < lines.length) {
     const line = lines[i].trim()
     
-    // Heading
+    // Heading — shift levels down by 1 to avoid duplicate H1 (article title is already H1)
     if (line.match(/^#{1,6}\s/)) {
-      const level = line.match(/^(#{1,6})/)?.[0].length || 2
+      const rawLevel = line.match(/^(#{1,6})/)?.[0].length || 2
+      const level = Math.min(rawLevel + 1, 6)
       blocks.push({ type: 'heading', level, content: line.replace(/^#{1,6}\s/, '') })
       i++
       continue
@@ -149,8 +150,9 @@ function renderMagazineBlock(block: ContentBlock, idx: number) {
       )
     
     case 'heading':
-      const HeadingTag = `h${block.level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-      const sizeClasses = ['text-3xl', 'text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm'][block.level - 1]
+      const safeLevel = Math.max(block.level, 2) as 2 | 3 | 4 | 5 | 6
+      const HeadingTag = `h${safeLevel}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+      const sizeClasses = ['text-3xl', 'text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm'][safeLevel - 1]
       return (
         <HeadingTag key={idx} className={`${sizeClasses} font-bold text-foreground mt-10 mb-4 border-l-4 border-emerald-500 pl-4`}>
           {block.content}
@@ -305,10 +307,19 @@ export function MagazineArticleTemplate({ article, relatedArticles, author }: Ma
             <span>By {article.author}</span>
             <span>•</span>
             <span>{article.date}</span>
+            {article.lastModified && (
+              <>
+                <span>•</span>
+                <span>Updated {article.lastModified}</span>
+              </>
+            )}
             <span>•</span>
             <span>{article.readTime}</span>
             <span>•</span>
-            <span>Evidence-reviewed</span>
+            <span className="flex items-center gap-1.5 text-emerald-300">
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Medically Reviewed
+            </span>
           </div>
         </div>
       </section>
@@ -353,6 +364,13 @@ export function MagazineArticleTemplate({ article, relatedArticles, author }: Ma
                 </div>
               </div>
             )}
+
+            {/* Medical Disclaimer */}
+            <div className="mt-12 rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800 p-5">
+              <p className="text-xs text-amber-800 dark:text-amber-200 leading-relaxed">
+                <strong className="font-semibold">Medical Disclaimer:</strong> This article is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before making changes to your diet, exercise routine, or treatment plan. Individual results may vary.
+              </p>
+            </div>
           </article>
 
           {/* Sidebar */}
