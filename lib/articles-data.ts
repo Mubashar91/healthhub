@@ -14,6 +14,7 @@ import {
   plantBasedDietBeginnersArticle,
   plantBasedDietBenefitsArticle,
   plantBasedEssentialNutrientsArticle,
+  bestFoodsForEnergyArticle,
 } from './articles'
 
 export interface Author {
@@ -45,7 +46,7 @@ export interface Article {
   wordCount?: number
   faqs?: { question: string; answer: string }[]
   lastModified?: string
-  template?: 'default' | 'magazine' | 'challenge' | 'wellness' // 'wellness' = mental health/guide style with calming purple theme
+  template?: 'default' | 'magazine' | 'challenge' | 'wellness'
 }
 
 export const authors: Record<string, Author> = {
@@ -132,7 +133,6 @@ export const authors: Record<string, Author> = {
   },
 }
 
-// Articles are now stored in individual files in the ./articles/ directory
 export const articles: Article[] = [
   sleepTipsArticle,
   plantBasedNutritionArticle,
@@ -148,6 +148,7 @@ export const articles: Article[] = [
   plantBasedDietBeginnersArticle,
   plantBasedDietBenefitsArticle,
   plantBasedEssentialNutrientsArticle,
+  bestFoodsForEnergyArticle,
 ]
 
 export function getArticleById(id: string): Article | undefined {
@@ -173,14 +174,13 @@ export function getFeaturedArticles(): Article[] {
 export function getRelatedArticles(articleId: string, limit: number = 3): Article[] {
   const article = getArticleById(articleId)
   if (!article) return []
-  
   return articles
     .filter(a => a.id !== articleId && a.category === article.category)
     .slice(0, limit)
 }
 
 export function getArticlesByTag(tag: string): Article[] {
-  return articles.filter(article => 
+  return articles.filter(article =>
     article.tags?.some(t => t.toLowerCase() === tag.toLowerCase())
   )
 }
