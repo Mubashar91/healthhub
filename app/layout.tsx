@@ -97,6 +97,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <head>
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="6a08eSHLZe4Hm-aUTFaT6ki8Vdlu8XtgnIToasfh_Ho" />
+        
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
