@@ -7,11 +7,14 @@ Site: HealthHub
 Description: Evidence-based health, wellness, fitness, and nutrition articles
 URL: https://healthhub-eta.vercel.app
 Language: English
-Last Updated: 2024-04-18
+Last Updated: 2026-08-29
 
 # Allowed Content
 Allow: /article/*
 Allow: /category/*
+Allow: /tag/*
+Allow: /articles
+Allow: /about
 Allow: /privacy
 Allow: /terms
 Allow: /disclaimer
@@ -29,7 +32,6 @@ Disallow: /404
 
 # Contact
 Contact: hello[at]healthhub[dot]com
-Business Address: 123 Wellness Street, San Francisco, CA 94102, USA
 
 # Content Owner
 Owner: HealthHub Team

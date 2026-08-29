@@ -37,7 +37,7 @@ function ArticleSchema({ article }: { article: ReturnType<typeof getArticleById>
       name: 'HealthHub',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://healthhub-eta.vercel.app/logo.png',
+        url: 'https://healthhub-eta.vercel.app/apple-icon.png',
       },
     },
     datePublished: article.date,

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Search, Menu, X, Zap } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const navigation = [
@@ -14,8 +14,17 @@ const navigation = [
 
 export function Header() {
   const pathname = usePathname()
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchFocused, setSearchFocused] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const submitSearch = (query: string) => {
+    const trimmed = query.trim()
+    if (trimmed) {
+      router.push(`/search?q=${encodeURIComponent(trimmed)}`)
+    }
+  }
 
   return (
     <>
@@ -53,25 +62,40 @@ export function Header() {
             </nav>
 
             {/* Search Bar */}
-            <div className={`relative hidden sm:block transition-all duration-300 ${searchFocused ? 'w-72' : 'w-48'} lg:w-56`}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                submitSearch(searchQuery)
+              }}
+              className={`relative hidden sm:block transition-all duration-300 ${searchFocused ? 'w-72' : 'w-48'} lg:w-56`}
+            >
               <input
                 type="search"
                 placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
                 className="h-11 w-full rounded-full border border-border bg-muted/50 px-4 pr-10 text-sm placeholder:text-muted-foreground focus:border-primary focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all"
               />
-              <Search className="absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            </div>
+              <button
+                type="submit"
+                aria-label="Search"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
+              >
+                <Search className="h-4 w-4" />
+              </button>
+            </form>
 
             {/* Mobile Search & Menu */}
             <div className="flex items-center gap-2 lg:hidden">
-              <button 
+              <Link
+                href="/search"
                 className="p-2.5 hover:bg-muted rounded-full transition-colors sm:hidden"
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" />
-              </button>
+              </Link>
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2.5 hover:bg-muted rounded-full transition-colors"

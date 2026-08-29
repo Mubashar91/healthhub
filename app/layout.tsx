@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'HealthHub - Evidence-Based Wellness & Health Articles',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     creator: '@healthhub',
     title: 'HealthHub | Evidence-Based Wellness, Fitness & Health Articles',
     description: 'Discover expert-reviewed health articles on fitness, nutrition, mental wellness & sleep.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   verification: {    
     google: '6a08eSHLZe4Hm-aUTFaT6ki8Vdlu8XtgnIToasfh_Ho',
@@ -107,9 +107,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         
-        {/* Preload critical fonts */}
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        
         {/* Google tag (gtag.js) - GA4 - Using next/script to avoid hydration issues */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-G92RECTKY3"
@@ -149,7 +146,7 @@ export default function RootLayout({
               '@type': 'Organization',
               name: 'HealthHub',
               url: 'https://healthhub-eta.vercel.app',
-              logo: 'https://healthhub-eta.vercel.app/icon.svg',
+              logo: 'https://healthhub-eta.vercel.app/apple-icon.png',
               description: 'Your trusted source for evidence-based health and wellness information.',
               sameAs: [
                 'https://twitter.com/healthhub',
@@ -172,7 +169,7 @@ export default function RootLayout({
               '@type': 'WebSite',
               name: 'HealthHub',
               url: 'https://healthhub-eta.vercel.app',
-              logo: 'https://healthhub-eta.vercel.app/icon.svg',
+              logo: 'https://healthhub-eta.vercel.app/apple-icon.png',
               description: 'Your trusted source for evidence-based health and wellness information.',
               sameAs: [
                 'https://twitter.com/healthhub',

@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
       url: `https://healthhub-eta.vercel.app/category/${slug}`,
       images: [
         {
-          url: '/og-image.jpg',
+          url: '/og-image.png',
           width: 1200,
           height: 630,
           alt: `${categoryName} Articles - HealthHub`,
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
       card: 'summary_large_image',
       title: `${categoryName} Articles | HealthHub`,
       description: categoryDescriptions[slug],
-      images: ['/og-image.jpg'],
+      images: ['/og-image.png'],
     },
     alternates: {
       canonical: `https://healthhub-eta.vercel.app/category/${slug}`,

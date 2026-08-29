@@ -19,7 +19,7 @@ export const metadata = {
     url: 'https://healthhub-eta.vercel.app',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'HealthHub - Modern Wellness & Fitness Information',
@@ -30,7 +30,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'HealthHub | Modern Wellness & Fitness Information',
     description: 'Expert-reviewed articles on fitness, nutrition, and mental wellness. Science-backed health tips.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: 'https://healthhub-eta.vercel.app',
@@ -91,8 +91,8 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">Handpicked articles for you</p>
               </div>
             </div>
-            <Link 
-              href="/"
+            <Link
+              href="/articles"
               className="hidden sm:flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
             >
               View All <ArrowRight className="h-4 w-4" />
@@ -225,32 +225,6 @@ export default function Home() {
 
       <Footer />
 
-      {/* JSON-LD Website Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'HealthHub',
-            description: 'Discover evidence-based health, fitness, nutrition, and mental wellness articles.',
-            url: 'https://healthhub-eta.vercel.app',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://healthhub-eta.vercel.app/search?q={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: 'HealthHub',
-              logo: {
-                '@type': 'ImageObject',
-                url: 'https://healthhub-eta.vercel.app/icon.svg',
-              },
-            },
-          }),
-        }}
-      />
       {/* ItemList Structured Data for Articles */}
       <script
         type="application/ld+json"

@@ -12,7 +12,7 @@ export const metadata = {
     title: 'About Us | HealthHub',
     description: 'Your trusted source for evidence-based health and wellness information.',
     url: 'https://healthhub-eta.vercel.app/about',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: 'https://healthhub-eta.vercel.app/about',

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Heart, Twitter, Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
+import { articles } from '@/lib/articles-data'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -12,13 +13,14 @@ export function Footer() {
   ]
 
   const categories = [
-    { name: 'Fitness', href: '/category/fitness', count: 4 },
-    { name: 'Nutrition', href: '/category/nutrition', count: 2 },
-    { name: 'Mental Health', href: '/category/mental-health', count: 2 },
+    { name: 'Fitness', href: '/category/fitness', count: articles.filter(a => a.category === 'Fitness').length },
+    { name: 'Nutrition', href: '/category/nutrition', count: articles.filter(a => a.category === 'Nutrition').length },
+    { name: 'Mental Health', href: '/category/mental-health', count: articles.filter(a => a.category === 'Mental Health').length },
   ]
 
   const company = [
     { name: 'Home', href: '/' },
+    { name: 'All Articles', href: '/articles' },
     { name: 'About Us', href: '/about' },
     { name: 'Fitness', href: '/category/fitness' },
     { name: 'Nutrition', href: '/category/nutrition' },

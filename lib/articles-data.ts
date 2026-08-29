@@ -15,6 +15,9 @@ import {
   plantBasedDietBenefitsArticle,
   plantBasedEssentialNutrientsArticle,
   bestFoodsForEnergyArticle,
+  highProteinDietMuscleGrowthArticle,
+  mentalHealthGuideToWellnessArticle,
+  mindfulnessForMentalHealthArticle,
 } from './articles'
 
 export interface Author {
@@ -131,6 +134,11 @@ export const authors: Record<string, Author> = {
       linkedin: 'dr-amara-wells',
     },
   },
+  'M Mubashar Shahzad': {
+    name: 'M Mubashar Shahzad',
+    title: 'Founder & Wellness Writer, HealthHub',
+    bio: 'M Mubashar Shahzad founded HealthHub to make evidence-based health and wellness guidance accessible to everyone, writing on mental health, stress management, and everyday wellbeing.',
+  },
 }
 
 export const articles: Article[] = [
@@ -149,6 +157,9 @@ export const articles: Article[] = [
   plantBasedDietBenefitsArticle,
   plantBasedEssentialNutrientsArticle,
   bestFoodsForEnergyArticle,
+  highProteinDietMuscleGrowthArticle,
+  mentalHealthGuideToWellnessArticle,
+  mindfulnessForMentalHealthArticle,
 ]
 
 export function getArticleById(id: string): Article | undefined {
@@ -179,15 +190,19 @@ export function getRelatedArticles(articleId: string, limit: number = 3): Articl
     .slice(0, limit)
 }
 
-export function getArticlesByTag(tag: string): Article[] {
+export function slugifyTag(tag: string): string {
+  return tag.toLowerCase().trim().replace(/\s+/g, '-')
+}
+
+export function getArticlesByTag(tagSlug: string): Article[] {
   return articles.filter(article =>
-    article.tags?.some(t => t.toLowerCase() === tag.toLowerCase())
+    article.tags?.some(t => slugifyTag(t) === slugifyTag(tagSlug))
   )
 }
 
 export function getAllTags(): string[] {
   const allTags = articles.flatMap(article => article.tags || [])
-  return [...new Set(allTags.map(tag => tag.toLowerCase()))].sort()
+  return [...new Set(allTags.map(tag => slugifyTag(tag)))].sort()
 }
 
 export function getAuthorByName(name: string): Author | undefined {

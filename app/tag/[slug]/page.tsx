@@ -27,8 +27,9 @@ export async function generateMetadata({ params }: TagPageProps) {
     return { title: 'Tag Not Found' }
   }
 
-  const title = `${slug.charAt(0).toUpperCase() + slug.slice(1)} Articles | HealthHub`
-  const description = `Explore ${tagArticles.length} articles about ${slug}. Discover evidence-based health and wellness information on ${slug}.`
+  const label = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  const title = `${label} Articles | HealthHub`
+  const description = `Explore ${tagArticles.length} articles about ${label}. Discover evidence-based health and wellness information on ${label}.`
 
   return {
     title,
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: TagPageProps) {
       url: `https://healthhub-eta.vercel.app/tag/${slug}`,
       images: [
         {
-          url: '/og-image.jpg',
+          url: '/og-image.png',
           width: 1200,
           height: 630,
           alt: `${slug} Articles - HealthHub`,
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: TagPageProps) {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/og-image.jpg'],
+      images: ['/og-image.png'],
     },
     alternates: {
       canonical: `https://healthhub-eta.vercel.app/tag/${slug}`,
@@ -72,7 +73,7 @@ export default async function TagPage({ params }: TagPageProps) {
     notFound()
   }
 
-  const formattedTag = slug.charAt(0).toUpperCase() + slug.slice(1)
+  const formattedTag = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 
   return (
     <>
@@ -89,7 +90,7 @@ export default async function TagPage({ params }: TagPageProps) {
             {formattedTag}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-foreground/70">
-            Explore {tagArticles.length} articles about {slug}. Discover tips, guides, and evidence-based information.
+            Explore {tagArticles.length} articles about {formattedTag}. Discover tips, guides, and evidence-based information.
           </p>
           <div className="mt-6 flex items-center gap-2">
             <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
@@ -141,8 +142,8 @@ export default async function TagPage({ params }: TagPageProps) {
               {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'Tags',
-                item: 'https://healthhub-eta.vercel.app/tags',
+                name: 'All Articles',
+                item: 'https://healthhub-eta.vercel.app/articles',
               },
               {
                 '@type': 'ListItem',
@@ -162,7 +163,7 @@ export default async function TagPage({ params }: TagPageProps) {
             '@context': 'https://schema.org',
             '@type': 'CollectionPage',
             name: `${formattedTag} Articles | HealthHub`,
-            description: `Articles about ${slug} - health and wellness tips, guides, and evidence-based information.`,
+            description: `Articles about ${formattedTag} - health and wellness tips, guides, and evidence-based information.`,
             url: `https://healthhub-eta.vercel.app/tag/${slug}`,
             mainEntity: {
               '@type': 'ItemList',

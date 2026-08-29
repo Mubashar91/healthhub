@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Sidebar } from '@/components/sidebar'
 import { ArticleCard } from '@/components/article-card'
 import { Newsletter } from '@/components/newsletter'
-import { type Article, type Author } from '@/lib/articles-data'
+import { type Article, type Author, slugifyTag } from '@/lib/articles-data'
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark, ShieldCheck, RefreshCw } from 'lucide-react'
 
@@ -151,7 +151,7 @@ export function DefaultArticleTemplate({ article, relatedArticles, author }: Def
                 {article.tags.map((tag) => (
                   <Link
                     key={tag}
-                    href={`/tag/${tag}`}
+                    href={`/tag/${slugifyTag(tag)}`}
                     className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground/60 hover:bg-emerald-100 hover:text-emerald-700 transition-colors"
                   >
                     #{tag}
